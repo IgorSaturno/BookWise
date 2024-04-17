@@ -5,12 +5,15 @@ import {
   BookCardDetails,
   BookCardImage,
   BookCardName,
+  ReadBage,
 } from './styles'
 import { Text } from '../Typography'
 import { RatingStars } from '../RatingStars'
+import { RatingsDialog } from '../RatingsDialog'
 
 export type BookWithAvgRating = Book & {
   avgRating: number
+  alreadyRead: boolean
 }
 
 type BookCardProps = {
@@ -33,23 +36,26 @@ export function BookCard({ book, size = 'md' }: BookCardProps) {
 
   const currentSize = IMAGE_SIZES[size]
   return (
-    <BookCardContainer>
-      <BookCardImage
-        width={currentSize.width}
-        height={currentSize.heigth}
-        css={{ minWidth: currentSize.width }}
-        alt={book.name}
-        src={book.cover_url}
-      />
-      <BookCardDetails>
-        <div>
-          <BookCardName size="xs">{book.name}</BookCardName>
-          <Text size="sm" color="gray-400">
-            {book.author}
-          </Text>
-        </div>
-        <RatingStars rating={book.avgRating} />
-      </BookCardDetails>
-    </BookCardContainer>
+    <RatingsDialog bookId={book?.id}>
+      <BookCardContainer>
+        {book.alreadyRead && <ReadBage>LIDO</ReadBage>}
+        <BookCardImage
+          width={currentSize.width}
+          height={currentSize.heigth}
+          css={{ minWidth: currentSize.width }}
+          alt={book.name}
+          src={book.cover_url}
+        />
+        <BookCardDetails>
+          <div>
+            <BookCardName size="xs">{book.name}</BookCardName>
+            <Text size="sm" color="gray-400">
+              {book.author}
+            </Text>
+          </div>
+          <RatingStars rating={book.avgRating} />
+        </BookCardDetails>
+      </BookCardContainer>
+    </RatingsDialog>
   )
 }

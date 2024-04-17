@@ -7,20 +7,25 @@ export const RatingCardContainer = styled('div', {
   padding: '$6',
   display: 'flex',
   flexDirection: 'column',
-  background: '$gray700',
+
+  variants: {
+    variant: {
+      default: {
+        background: '$gray700',
+      },
+      compact: {
+        background: '$gray600',
+      },
+    },
+  },
 })
 
-export const UserDetails = styled('div', {
+export const CompactDetails = styled('div', {
+  width: '100%',
   display: 'flex',
-  alignItems: 'start',
+  alignItems: 'center',
   justifyContent: 'space-between',
-  marginBottom: '$8',
-
-  section: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '$4',
-  },
+  marginBottom: '$3',
 })
 
 export const BookDetails = styled('div', {
@@ -45,6 +50,19 @@ export const RatingBookImage = styled(Image, {
 export const BookContent = styled('div', {
   display: 'flex',
   flexDirection: 'column',
+})
+
+export const UserDetails = styled('div', {
+  display: 'flex',
+  alignItems: 'start',
+  justifyContent: 'space-between',
+  marginBottom: '$8',
+
+  section: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '$4',
+  },
 })
 
 export const ToggleShowMoreButton = styled('button', {

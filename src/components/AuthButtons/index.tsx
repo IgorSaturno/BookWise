@@ -7,10 +7,11 @@ import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/router'
 
 type AuthButtonProps = {
+  canGuest?: boolean
   callbackUrl?: string
 }
 
-export function AuthButtons({ callbackUrl = '/' }: AuthButtonProps) {
+export function AuthButtons({ canGuest, callbackUrl = '/' }: AuthButtonProps) {
   const router = useRouter()
 
   const handleSingIn = (provider?: string) => {
@@ -33,10 +34,12 @@ export function AuthButtons({ callbackUrl = '/' }: AuthButtonProps) {
         <Image src={GithubIcon} alt="Github logo" />
         Entrar com Github
       </AuthButton>
-      <AuthButton onClick={() => handleSingIn()}>
-        <Image src={RocketIcon} alt="Rocket Icon" />
-        Entrar como visitante
-      </AuthButton>
+      {canGuest && (
+        <AuthButton onClick={() => handleSingIn()}>
+          <Image src={RocketIcon} alt="Rocket Icon" />
+          Entrar como visitante
+        </AuthButton>
+      )}
     </AuthButtonContainer>
   )
 }
